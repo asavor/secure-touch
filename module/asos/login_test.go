@@ -33,7 +33,9 @@ func TestLogin(t *testing.T) {
 		fmt.Println(err)
 		return
 	}
-	interactions, err := asos.GenerateInteractionPayload(true, false)
+
+	count := 0
+	interactions, err := asos.GenerateInteractionPayload(false, false, count)
 	if err != nil {
 		fmt.Println(err)
 		return
@@ -57,26 +59,13 @@ func TestLogin(t *testing.T) {
 		return
 	}
 
-	interactions3, err := asos.GenerateInteractionPayload(true, false)
+	interactions1, err := asos.GenerateInteractionPayload(true, true, count)
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
 
-	_, err = asos.SecureTouchPost("interactions", interactions3, true, true)
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-
-	interactions2, err := asos.GenerateInteractionPayload(true, true)
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-	fmt.Println(interactions2)
-
-	_, err = asos.SecureTouchPost("interactions", interactions2, true, true)
+	_, err = asos.SecureTouchPost("interactions", interactions1, true, true)
 	if err != nil {
 		fmt.Println(err)
 		return

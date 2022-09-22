@@ -11,7 +11,7 @@ import (
 	"time"
 )
 
-func (c *Client) GenerateInteractionPayload(mact, kact bool) (string, error) {
+func (c *Client) GenerateInteractionPayload(mact, kact bool, count int) (string, error) {
 	KeyboardEvents := make([]types.KeyboardInteractionPayloads, 0)
 	var MactEvents []types.MouseInteractionPayloads
 
@@ -238,7 +238,7 @@ func (c *Client) GenerateInteractionPayload(mact, kact bool) (string, error) {
 		GyroscopeData:               []string{},
 		LinearAccelerometerData:     []string{},
 		RotationData:                []string{},
-		Index:                       1,
+		Index:                       int(count),
 		PayloadID:                   uuid.New().String(),
 		Tags:                        tagPayload,
 		Environment:                 environment,

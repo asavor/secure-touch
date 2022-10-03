@@ -7,6 +7,7 @@ import (
 	"github.com/saucesteals/fhttp/cookiejar"
 	"github.com/saucesteals/mimic"
 	"net/url"
+	"secure-touch/generator/device"
 )
 
 type Client struct {
@@ -23,6 +24,7 @@ type Client struct {
 	StToken       string
 	AppSessionId  string
 	LoginUrl      string
+	Device        *device.OneDevice
 }
 
 func MakeClient(proxy *url.URL) (*Client, error) {
@@ -43,6 +45,7 @@ func MakeClient(proxy *url.URL) (*Client, error) {
 	c.AppID = "asos"
 	c.AuthToken = "YjIxMzVjdDIxSnVsVnlP"
 	c.Website = "https://my.asos.com/"
+	c.Device = device.GetRandomDevice()
 	c.Instanceuuid = uuid.New().String()
 
 	return c, nil

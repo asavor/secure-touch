@@ -34,7 +34,8 @@ func (c *Client) SecureTouchPost(method, payload string, gzipData, encryptData b
 		log.Println(err)
 		return "", err
 	}
-	time.Sleep(2 * time.Second)
+
+	time.Sleep(time.Duration(RanNumber(1, 3)) * time.Second)
 
 	clientePoch := time.Now().UTC().UnixNano() / 1e6
 

@@ -104,10 +104,10 @@ func (c *Client) GenerateInteractionPayload(mact, kact bool, count int) (string,
 				WindowID:              windowID,
 				LocationHref:          `https://my.asos.com/identity/login?signin=` + c.LoginUrl,
 				Checksum:              "4426372825",
-				InnerWidth:            2560,
-				InnerHeight:           617,
-				OuterWidth:            2560,
-				OuterHeight:           1390,
+				InnerWidth:            c.Device.Window.InnerWidth,
+				InnerHeight:           c.Device.Window.InnerWidth,
+				OuterWidth:            c.Device.Window.OuterWidth,
+				OuterHeight:           c.Device.Window.InnerHeight,
 				SnapshotsReduceFactor: 0,
 				EventsWereReduced:     true,
 			},
@@ -121,7 +121,7 @@ func (c *Client) GenerateInteractionPayload(mact, kact bool, count int) (string,
 
 		eventTs := gofakeit.Float64Range(10000, 11000)
 		epocTs := nowtime - toFixed(eventTs, 10)
-		xSlice, ySlice := mact2.TfylGenerateMact(40, 1440, 2560)
+		xSlice, ySlice := mact2.TfylGenerateMact(40, int16(c.Device.Screen.Height), int16(c.Device.Screen.Width))
 
 		for i, _ := range xSlice {
 			mouseMovements := types.EventsMouse{
@@ -169,10 +169,10 @@ func (c *Client) GenerateInteractionPayload(mact, kact bool, count int) (string,
 				Checksum:              "4426372825",
 				Mouseout:              8,
 				Mouseover:             8,
-				InnerWidth:            2560,
-				InnerHeight:           617,
-				OuterWidth:            1392,
-				OuterHeight:           1392,
+				InnerWidth:            c.Device.Window.InnerWidth,
+				InnerHeight:           c.Device.Window.InnerWidth,
+				OuterWidth:            c.Device.Window.OuterWidth,
+				OuterHeight:           c.Device.Window.InnerHeight,
 				SnapshotsReduceFactor: 0,
 				EventsWereReduced:     false,
 			},
@@ -190,17 +190,19 @@ func (c *Client) GenerateInteractionPayload(mact, kact bool, count int) (string,
 		EpochTs:        epochTime,
 		AdditionalData: types.AdditionalDataIndirectEventPayload{},
 	})
+	ran1 := RanNumber(3000, 6000)
+	ran2 := RanNumber(3000, 6000)
 
 	tagPayload := []types.Tags{
 		{
 			Name:      "SDK started",
-			EpochTs:   nowtime - 6000,
-			Timestamp: nowtime - 6000,
+			EpochTs:   nowtime - int64(ran1),
+			Timestamp: nowtime - int64(ran2),
 		},
 		{
 			Name:      "SDK first load",
-			EpochTs:   nowtime - 6000,
-			Timestamp: nowtime - 6000,
+			EpochTs:   nowtime - int64(ran1),
+			Timestamp: nowtime - int64(ran2),
 		},
 		{
 			Name:      "id-signIn-loginAttempt-click:outlook.com",
@@ -217,8 +219,8 @@ func (c *Client) GenerateInteractionPayload(mact, kact bool, count int) (string,
 		Ops:              0,
 		WebGl:            "",
 		DevicePixelRatio: 1,
-		ScreenWidth:      2560,
-		ScreenHeight:     1440,
+		ScreenWidth:      c.Device.Screen.Width,
+		ScreenHeight:     c.Device.Screen.Height,
 	}
 
 	payload := &types.InteractionPayload{

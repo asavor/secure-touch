@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"log"
 	"net/url"
+	"secure-touch/generator/device"
 	"testing"
 )
 
@@ -79,7 +80,25 @@ func TestClient_GenerateInteractionPayload(t *testing.T) {
 	if err != nil {
 		log.Println("Failed to create client ")
 	}
-	payload, err := c.GenerateInteractionPayload(true, true)
+	payload, err := c.GenerateInteractionPayload(true, true, 1)
+	if err != nil {
+		log.Println("failed to create starter payload ")
+	}
+	fmt.Println(payload)
+
+}
+
+func TestClient_GenerateMetadata(t *testing.T) {
+
+	device.GetDevices()
+
+	formatProxy, _ := url.Parse("http://localhost:8888")
+
+	c, err := MakeClient(formatProxy)
+	if err != nil {
+		log.Println("Failed to create client ")
+	}
+	payload, err := c.GenerateMetadata()
 	if err != nil {
 		log.Println("failed to create starter payload ")
 	}

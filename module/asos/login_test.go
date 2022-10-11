@@ -2,12 +2,13 @@ package asos
 
 import (
 	"fmt"
+	"secure-touch/generator/device"
 	"secure-touch/module/asos/request"
 	"testing"
 )
 
 func TestLogin(t *testing.T) {
-
+	device.GetDevices()
 	asos, _ := request.Init()
 
 	err := asos.Home()
@@ -40,6 +41,7 @@ func TestLogin(t *testing.T) {
 		fmt.Println(err)
 		return
 	}
+	count++
 
 	_, err = asos.SecureTouchPost("interactions", interactions, true, true)
 	if err != nil {

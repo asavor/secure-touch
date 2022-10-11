@@ -35,9 +35,10 @@ func (c *Client) SecureTouchPost(method, payload string, gzipData, encryptData b
 		return "", err
 	}
 
-	time.Sleep(time.Duration(RanNumber(1, 3)) * time.Second)
-
 	clientePoch := time.Now().UTC().UnixNano() / 1e6
+	if method == "starter" {
+		c.StartTime = clientePoch
+	}
 
 	request.Header = header.SecureTouchHeader(c.UserAgent, c.Sch, strconv.FormatInt(clientePoch, 10), c.Instanceuuid, c.AuthToken, c.ClientVersion, c.Website)
 

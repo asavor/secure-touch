@@ -3,6 +3,7 @@ package generator
 import (
 	"encoding/json"
 	"log"
+	"time"
 )
 
 type starter struct {
@@ -26,6 +27,7 @@ func (c *Client) GenerateStarterPayload() (string, error) {
 		log.Println("could not marshal json")
 		return "", err
 	}
+	time.Sleep(time.Duration(RanNumber(200, 400)) * time.Millisecond)
 
 	return string(jsonPayload), nil
 }

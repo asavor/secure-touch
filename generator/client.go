@@ -25,11 +25,12 @@ type Client struct {
 	AppSessionId  string
 	LoginUrl      string
 	Device        *device.OneDevice
+	StartTime     int64
 }
 
 func MakeClient(proxy *url.URL) (*Client, error) {
 
-	m, _ := mimic.Chromium(mimic.BrandChrome, mimic.MustGetLatestVersion(mimic.PlatformWindows))
+	m, _ := mimic.Chromium(mimic.BrandChrome, `106.0.0.0`)
 
 	jar, _ := cookiejar.New(nil)
 
@@ -37,11 +38,11 @@ func MakeClient(proxy *url.URL) (*Client, error) {
 
 	c := &Client{Client: client}
 
-	c.Sch = `Google Chrome";v="105", "Not)A;Brand";v="8", "Chromium";v="105`
+	c.Sch = `"Chromium";v="106", "Google Chrome";v="106", "Not;A=Brand";v="99"`
 	c.UserAgent = fmt.Sprintf("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/%s Safari/537.36", m.Version())
 	c.DeviceID = "Id-" + uuid.New().String()
 	c.ClientVersion = "3.13.2w"
-	c.DeviceType = "Chrome(105.0.0.0)-Windows(10)"
+	c.DeviceType = "Chrome(106.0.0.0)-Windows(10)"
 	c.AppID = "asos"
 	c.AuthToken = "YjIxMzVjdDIxSnVsVnlP"
 	c.Website = "https://my.asos.com/"

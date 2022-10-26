@@ -16,7 +16,7 @@ Reversing for fun!
 
 #### Payload Type
 
-- **[Starter](https://gitfront.io/r/user-2983673/NfiRDsW7nny8/secure-touch/blob/generator/interaction.go)**
+- **[Starter](https://gitfront.io/r/user-2983673/NfiRDsW7nny8/secure-touch/blob/generator/starter.go)**
 - **[Metadata](https://gitfront.io/r/user-2983673/NfiRDsW7nny8/secure-touch/blob/generator/metadata.go)**
 - **[Interaction](https://gitfront.io/r/user-2983673/NfiRDsW7nny8/secure-touch/blob/generator/interaction.go)**
 
@@ -27,7 +27,3 @@ Reversing for fun!
 #### Validate
 
 - **[Bypass secure touch](https://gitfront.io/r/user-2983673/NfiRDsW7nny8/secure-touch/blob/module/asos/login_test.go)**
-
-```
-
-```

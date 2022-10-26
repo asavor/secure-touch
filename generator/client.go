@@ -2,12 +2,13 @@ package generator
 
 import (
 	"fmt"
+	"net/url"
+	"secure-touch/generator/device"
+
 	"github.com/google/uuid"
 	http "github.com/saucesteals/fhttp"
 	"github.com/saucesteals/fhttp/cookiejar"
 	"github.com/saucesteals/mimic"
-	"net/url"
-	"secure-touch/generator/device"
 )
 
 type Client struct {
